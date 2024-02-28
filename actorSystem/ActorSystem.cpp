@@ -24,7 +24,7 @@ void ActorSystem::traceQueue() {
                               popTask();
                           }
                           log_info("size of tasks {}", tasks.size());
-                          std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+                          std::this_thread::sleep_for(std::chrono::milliseconds(100));
                       }
                   }
     );

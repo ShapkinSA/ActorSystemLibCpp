@@ -30,11 +30,7 @@ public:
     void popTask();
     void setActorSystem(ActorSystem * actorSystemPtr);
 
-    template<typename T, typename std::enable_if<std::is_base_of<MessageBox, T>::value>::type * = nullptr>
-    void tell(const std::string &receiver, T *& messageBox) {
-        actorSystem->pushTask(std::make_shared<DataExchanger>(name, receiver, dynamic_cast<MessageBox*>(messageBox)));
-        messageBox = nullptr;
-    }
+    void tell(const std::string &receiver, MessageBox *& messageBox);
 
 private:
     ActorSystem *actorSystem;
