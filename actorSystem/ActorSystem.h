@@ -12,9 +12,9 @@
 #include <thread>
 #include <chrono>
 #include <iostream>
-#include "code/abstractActor/AbstractActor.h"
-#include "code/dataExchanger/DataExchanger.h"
-#include "code/utils/Logger.h"
+#include "../abstractActor/AbstractActor.h"
+#include "../dataExchanger/DataExchanger.h"
+#include "../utils/Logger.h"
 #include <concepts>
 
 

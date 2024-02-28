@@ -6,14 +6,14 @@
 #define ACTORSYSTEM_ABSTRACTACTOR_H
 
 #include <string>
-#include "code/actorSystem/ActorSystem.h"
-#include "code/utils/Logger.h"
+#include "../actorSystem/ActorSystem.h"
+#include "../utils/Logger.h"
 #include <queue>
 #include <functional>
 #include <typeindex>
 #include <any>
 #include <utility>
-#include "code/dataExchanger/DataExchanger.h"
+#include "../dataExchanger/DataExchanger.h"
 
 #define setCallback(type,function) (callbackMap[typeid(type)] = [this](const std::string & sender,  const MessageBox *mb){ function(sender,dynamic_cast<const type*>(mb));}  )
 
