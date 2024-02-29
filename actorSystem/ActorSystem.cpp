@@ -2,6 +2,7 @@
 // Created by user on 20.02.24.
 //
 
+
 #include "ActorSystem.h"
 
 std::map<std::string, AbstractActor*> &ActorSystem::getActors() {
@@ -17,9 +18,16 @@ void ActorSystem::traceQueue() {
                       while(1){
                           if (!tasks.empty()) {
                               auto currentTask = tasks.front();
-                              log_info("ActorSystem found task: sender: {}, receiver: {}, type: {}. size of tasks {}", currentTask->sender, currentTask->receiver, typeid(*currentTask->messageBox).name(), tasks.size());
-                              if(actors.contains(currentTask->receiver)){
-                                  actors[currentTask->receiver]->pushTask(currentTask);
+
+                              std::stringstream  receivers;
+                              std::copy(currentTask->receivers.begin(),currentTask->receivers.end(), std::ostream_iterator<std::string>(receivers,", "));
+
+                              log_info("ActorSystem found task: sender: {}, receivers: {} type: {}. size of tasks {}", currentTask->sender, receivers.str(), typeid(*currentTask->messageBox).name(), tasks.size());
+
+                              for (const std::string& receiver : currentTask->receivers) {
+                                  if (actors.contains(receiver)) {
+                                      actors[receiver]->pushTask(currentTask);
+                                  }
                               }
                               popTask();
                           }

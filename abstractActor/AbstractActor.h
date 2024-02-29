@@ -30,6 +30,7 @@ public:
     void popTask();
     void setActorSystem(ActorSystem * actorSystemPtr);
     void tell(const std::string &receiver, MessageBox *& messageBox);
+    void tell(const std::list<std::string> &receivers, MessageBox *& messageBox);
     virtual void preStart(){};
     virtual void postStop(){};
 private:

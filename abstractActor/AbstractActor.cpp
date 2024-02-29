@@ -13,10 +13,7 @@ void AbstractActor::traceQueue() {
                       while (1) {
                           if (!actorRequests.empty()) {
                               auto task = actorRequests.front();
-                              log_info(
-                                      "I ({}) found actorRequest: sender: {}, receiver: {}, payload type: {}. size of actorRequests {}",
-                                      this->name, task->sender, task->receiver, typeid(*task->messageBox).name(),
-                                      actorRequests.size());
+                              log_info("I ({}) found actorRequest: sender: {}, payload type: {}. size of actorRequests {}", this->name, task->sender, typeid(*task->messageBox).name(), actorRequests.size());
                               if (callbackMap.contains(typeid(*task->messageBox))) {
                                   callbackMap[typeid(*task->messageBox)](task->sender, task->messageBox);
                               }
@@ -43,6 +40,12 @@ void AbstractActor::setActorSystem(ActorSystem *actorSystemPtr) {
 }
 
 void AbstractActor::tell(const std::string &receiver, MessageBox *&messageBox) {
-    actorSystem->pushTask(std::make_shared<DataExchanger>(name, receiver, dynamic_cast<MessageBox *>(messageBox)));
+    std::list<std::string> receivers = {receiver};
+    actorSystem->pushTask(std::make_shared<DataExchanger>(name, receivers, dynamic_cast<MessageBox *>(messageBox)));
+    messageBox = nullptr;
+}
+
+void AbstractActor::tell(const std::list<std::string> &receivers, MessageBox *&messageBox) {
+    actorSystem->pushTask(std::make_shared<DataExchanger>(name, receivers, dynamic_cast<MessageBox *>(messageBox)));
     messageBox = nullptr;
 }

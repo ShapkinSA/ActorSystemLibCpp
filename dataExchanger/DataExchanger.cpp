@@ -4,10 +4,7 @@
 
 #include "DataExchanger.h"
 
-#include <utility>
-#include <iostream>
-
-DataExchanger::DataExchanger(std::string  sender, std::string  receiver, const MessageBox *messageBox) : sender(std::move(sender)), receiver(std::move(receiver)){
+DataExchanger::DataExchanger(std::string  sender, const std::list<std::string> &receivers, const MessageBox *messageBox) : sender(std::move(sender)), receivers(receivers){
     this->messageBox = messageBox;
 }
 

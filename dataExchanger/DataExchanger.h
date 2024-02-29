@@ -7,20 +7,21 @@
 
 #include <string>
 #include <memory>
-#include <any>
-#include <typeindex>
+#include <utility>
+#include <iostream>
+#include <list>
 #include "../messageBox/MessageBox.h"
 
 
 class DataExchanger {
 public:
 
-    DataExchanger(std::string sender, std::string receiver, const MessageBox* messageBox);
+    DataExchanger(std::string sender, const std::list<std::string> &receivers, const MessageBox* messageBox);
     ~DataExchanger();
 
 public:
-    std::string sender;
-    std::string receiver;
+    const std::string sender;
+    const std::list<std::string> receivers;
     const MessageBox *messageBox = nullptr;
 };
 
