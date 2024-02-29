@@ -29,9 +29,9 @@ public:
     void pushTask(const std::shared_ptr<DataExchanger>&dataExchanger);
     void popTask();
     void setActorSystem(ActorSystem * actorSystemPtr);
-
     void tell(const std::string &receiver, MessageBox *& messageBox);
-
+    virtual void preStart(){};
+    virtual void postStop(){};
 private:
     ActorSystem *actorSystem;
     std::queue<std::shared_ptr<DataExchanger>> actorRequests;

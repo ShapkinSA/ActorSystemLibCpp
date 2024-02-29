@@ -29,6 +29,7 @@ public:
         T *t = new T(name, args...);
         t->setActorSystem(this);
         getActors()[name] = t;
+        t->preStart();
         return t;
     }
 
